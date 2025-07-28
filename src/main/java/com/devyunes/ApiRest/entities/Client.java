@@ -15,6 +15,8 @@ public class Client {
 	@NotBlank
 	private String name;
 	@NotBlank
+	private String cpf;
+	@NotBlank
 	private Long income;
 	
 	private LocalDate birthDate;
@@ -24,10 +26,11 @@ public class Client {
 	public Client() {
 	}
 
-	public Client(Long id, String name, Long income, LocalDate birthDate, Integer children) {
+	public Client(Long id, String name,String cpf, Long income, LocalDate birthDate, Integer children) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.cpf = cpf;
 		this.income = income;
 		this.birthDate = birthDate;
 		this.children = children;
@@ -47,6 +50,15 @@ public class Client {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public Long getIncome() {
