@@ -16,7 +16,7 @@ public class Client {
 	private String name;
 	@NotBlank
 	private String cpf;
-	@NotBlank
+
 	private Long income;
 	
 	private LocalDate birthDate;
