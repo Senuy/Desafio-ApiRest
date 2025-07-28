@@ -8,6 +8,7 @@ public class ClientDTO {
 
 	private Long id;
 	private String name;
+	private String cpf;
 	private Long incomme;
 	private LocalDate birthDate;
 	private Integer children;
@@ -15,10 +16,11 @@ public class ClientDTO {
 	public ClientDTO() {
 	}
 
-	public ClientDTO(Long id, String name, Long incomme, LocalDate birthDate, Integer children) {
+	public ClientDTO(Long id, String name, String cpf, Long incomme, LocalDate birthDate, Integer children) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.cpf = cpf;
 		this.incomme = incomme;
 		this.birthDate = birthDate;
 		this.children = children;
@@ -27,6 +29,7 @@ public class ClientDTO {
 	public ClientDTO(Client entity) {
 		id = entity.getId();
 		name = entity.getName();
+		cpf = entity.getCpf();
 		incomme = entity.getIncome();
 		birthDate = entity.getBirthDate();
 		children = entity.getChildren();
@@ -38,6 +41,10 @@ public class ClientDTO {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getCpf() {
+		return cpf;
 	}
 
 	public Long getIncomme() {
