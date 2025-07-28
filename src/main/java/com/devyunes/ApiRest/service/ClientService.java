@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.devyunes.ApiRest.controller.ClientController;
 import com.devyunes.ApiRest.dto.ClientDTO;
 import com.devyunes.ApiRest.entities.Client;
 import com.devyunes.ApiRest.repositories.ClientRepository;
@@ -31,14 +31,29 @@ public class ClientService {
 	@Transactional
 	public ClientDTO insert(ClientDTO dto) {
 		Client entity = new Client();
-		entity.setName(dto.getName());
-		entity.setCpf(dto.getCpf());
-		entity.setIncome(dto.getIncomme());
-		entity.setBithDate(dto.getBirthDate());
-		entity.setChildren(dto.getChildren());
-
+		dtoToEntity(dto, entity);
 		entity = repository.save(entity);
 		return new ClientDTO(entity);
-
 	}
+
+	@Transactional
+	public ClientDTO update(Long id, ClientDTO dto) {
+		Client entity = repository.getReferenceById(id);
+		dtoToEntity(dto, entity);
+		entity = repository.save(entity);
+		return new ClientDTO(entity);
+	}
+	@Transactional
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
+
+	private void dtoToEntity(ClientDTO dto, Client entity) {
+		entity.setName(dto.getName());
+		entity.setCpf(dto.getCpf());
+		entity.setIncome(dto.getIncome());
+		entity.setBithDate(dto.getBirthDate());
+		entity.setChildren(dto.getChildren());
+	}
+
 }
