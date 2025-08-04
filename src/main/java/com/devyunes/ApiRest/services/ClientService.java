@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import com.devyunes.ApiRest.dto.ClientDTO;
 import com.devyunes.ApiRest.entities.Client;
-import com.devyunes.ApiRest.entities.exceptions.ResourceNotFoundException;
 import com.devyunes.ApiRest.repositories.ClientRepository;
 import com.devyunes.ApiRest.services.exceptions.DatabaseException;
+import com.devyunes.ApiRest.services.exceptions.ResourceNotFoundException;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -23,7 +23,7 @@ public class ClientService {
 
 	@Transactional(readOnly = true)
 	public ClientDTO findById(Long id) {
-		Client client = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
+		Client client = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Cliente inexistente"));
 		return new ClientDTO(client);
 	}
 
@@ -50,14 +50,14 @@ public class ClientService {
 			return new ClientDTO(entity);
 			
 		} catch (EntityNotFoundException e) {
-			throw new ResourceNotFoundException("Recurso não encontrado");
+			throw new ResourceNotFoundException("Cliente Inexistente");
 		}
 	}
 
 	@Transactional(propagation = Propagation.SUPPORTS)
 	public void delete(Long id) {
 		if(!repository.existsById(id)) {
-			throw new ResourceNotFoundException("Recurso não encontrado");
+			throw new ResourceNotFoundException("Cliente Inexistente");
 		}
 		try {
 			repository.deleteById(id);			
