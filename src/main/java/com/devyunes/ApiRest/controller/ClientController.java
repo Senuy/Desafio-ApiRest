@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devyunes.ApiRest.dto.ClientDTO;
-import com.devyunes.ApiRest.service.ClientService;
+import com.devyunes.ApiRest.services.ClientService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/clients")
@@ -34,12 +36,12 @@ public class ClientController {
 	}
 
 	@PostMapping
-	public ClientDTO insert(@RequestBody ClientDTO dto) {
+	public ClientDTO insert(@Valid @RequestBody ClientDTO dto) {
 		return service.insert(dto);
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<ClientDTO> update(@PathVariable Long id, @RequestBody ClientDTO dto) {
+	public ResponseEntity<ClientDTO> update(@PathVariable Long id,@Valid @RequestBody ClientDTO dto) {
 		dto = service.update(id, dto);
 		return ResponseEntity.ok(dto);
 	}
