@@ -12,9 +12,9 @@ public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotBlank
+	
 	private String name;
-	@NotBlank
+	
 	private String cpf;
 
 	private Long income;
